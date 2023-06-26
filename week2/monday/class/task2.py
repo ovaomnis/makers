@@ -1,0 +1,1 @@
+print('odd' if int(input("Input Your num: ")) % 2 else 'even', 'and your num: ')

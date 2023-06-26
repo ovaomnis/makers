@@ -1,0 +1,1 @@
+print(600 * (1 - int(input('ender discount: ')) / 100))

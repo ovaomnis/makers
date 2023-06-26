@@ -1,0 +1,27 @@
+''' Linux Commands '''
+
+
+1. pwd - (print wroking directory) -> return absolute path to working directory
+2. ls - (list) -> lists everything in working dirctory or specified dir
+3. cd (change direcory) -> navigates to home directory
+	cd .. -> moves to upper directory
+	cd / -> moves to root directory
+	cd <dir_name> -> moves to specified directory (we can use absolute path)
+4. mkdir <dir_name> -> creates directory with <dir_name>
+5. clear -> clears terminal (ctrl+l -> moves terminal)
+6/ touch <file_name> -> creates file with <file_name>
+7. rmdir <dir_name> -> removes empty directory with <dir_name>
+8. rm <file_name> -> removes file with <file_name>
+9. rm -rf <dir_name> -> removes non-empty directory
+10. nano <file_name> -> opens <file_name> with nano text editor
+11. cat <file_name> -> returns files inside
+12. mv <file_name1> <file_name2> -> moves or renames <file_name1> to <file_name2>
+13. cp <file_name> <dir_name> -> copies <file_name> to <dir_name>
+14. find <file_name_or_dir_name> -> finds specified file or dir
+	(univerisal vary find <where> -name <file_name_for_dir_name>)
+15. history -> return all used commands
+16. sudo -> provieds administrator rigths
+17. tree -> return working directory tree
+18. echo 'text' > <file_name> -> writes 'text' to <file_name>
+19. cat file_name > file_name2 -> copies inside of file_name to file_name2
+20. du <dir_name> (disk usage) -> shows how many sotrage uses <dir_name>
