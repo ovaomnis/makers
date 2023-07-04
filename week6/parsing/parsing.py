@@ -7,8 +7,14 @@ import json
 
 
 def open_db() -> List:
-    with open('data.json') as file:
-        return json.load(file)
+    try:
+        with open('data.json') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        with open('data.json', 'w+') as file:
+            file.write('[]')
+            file.seek(0)
+            return json.load(file)
 
 
 def add_records(data: List[dict]) -> None:
@@ -41,15 +47,23 @@ def get_data(html: str):
     return laptops
 
 
+def get_pages(html: str):
+    soup = BeautifulSoup(html, 'lxml')
+    return int(soup.find('ul', class_='pagination').find('li', class_='last').text)
+
+
 def clear_text(text: str) -> str:
     return text.replace('\n', '').strip()
 
 
 def main():
-    url = f'https://www.kivano.kg/noutbuki'
-
-    db = open_db()
-    add_records(get_data(get_html(url)))
+    url = 'https://www.kivano.kg/noutbuki'
+    pages = get_pages(get_html(url))
+    print("Page detected:", pages)
+    for i in range(1, pages + 1):
+        print('parsing page', i)
+        url_with_page = f'{url}?page{i}'
+        add_records(get_data(get_html(url_with_page)))
 
 
 if __name__ == '__main__':
