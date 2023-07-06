@@ -38,7 +38,7 @@ def get_news(html: str) -> List[dict]:
     def get_link(article: bs4.element.Tag) -> str:
         return clear_text(article.find('a', class_='ArticleItem--name').attrs.get('href'))
 
-    return [{'title': get_title(item), 'image': get_img(item), 'link': get_link(item)} for item in soup.find_all(class_='ArticleItem')]
+    return [{'title': get_title(item), 'image': get_img(item), 'link': get_link(item)} for item in soup.find_all(class_='ArticleItem', limit=20)]
 
 
 def get_description(html: str):
@@ -49,7 +49,7 @@ def get_description(html: str):
 if __name__ == '__main__':
     import datetime
     today = datetime.datetime.now().strftime('%Y-%m-%d')
-    url = f'https://kaktus.media/?lable=8&date={today}&order=popular'
+    url = f'https://kaktus.media/?lable=8&date={today}&order=time'
     news = get_news(get_html(url))
     print(get_description(get_html(news[0]['link'])))
 
