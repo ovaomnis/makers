@@ -31,7 +31,7 @@ def write_to_json(data: Dict):
         json_file.write(json.dumps(db, indent=2))
 
 
-def get_html(url: str) -> (bytes, int):
+def get_html(url: str) -> bytes:
     print('GET:', url)
     res = requests.get(url)
     return res.content
@@ -47,7 +47,7 @@ def get_data(html: bytes) -> bool:
 
     @handle_attr_err
     def get_year(car_tag: bs4.element.Tag) -> str:
-        return car.find(class_='caption-year').text
+        return car_tag.find(class_='caption-year').text
 
     @handle_attr_err
     def get_title(car_tag: bs4.element.Tag, year_to_replace: str) -> str:
@@ -55,19 +55,19 @@ def get_data(html: bytes) -> bool:
 
     @handle_attr_err
     def get_img(car_tag: bs4.element.Tag) -> str:
-        return car_tag.car.find('img').attrs.get('src')
+        return car_tag.find('img').attrs.get('src')
 
     @handle_attr_err
     def get_millage(car_tag: bs4.element.Tag) -> str:
-        return clear_text(car.find(class_='catalog-item-mileage').text)
+        return clear_text(car_tag.find(class_='catalog-item-mileage').text)
 
     @handle_attr_err
     def get_dollar_price(car_tag: bs4.element.Tag) -> str:
-        return clear_text(car.find(class_='catalog-item-price').text)
+        return clear_text(car_tag.find(class_='catalog-item-price').text)
 
     @handle_attr_err
     def get_som_price(car_tag: bs4.element.Tag) -> str:
-        return clear_text(car.find(class_='catalog-item-price').attrs.get('title'))
+        return clear_text(car_tag.find(class_='catalog-item-price').attrs.get('title'))
 
     @handle_attr_err
     def get_descr(car_tag: bs4.element.Tag) -> str:
