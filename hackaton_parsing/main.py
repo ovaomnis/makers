@@ -18,7 +18,7 @@ def get_news() -> dict:
     if not news or news['validated'] < datetime.datetime.now():
         news = {
             'validated': datetime.datetime.now() + datetime.timedelta(seconds=60),
-            'news': list(parser.get_news(parser.get_html(url)))
+            'news': parser.get_news(parser.get_html(url))
         }
         return news
     return news
@@ -31,14 +31,14 @@ def start_handler(message: Message):
         f'{news_list["news"].index(n)}. {n["title"]}'
         for n in news_list['news']
     ]))
-    bot.send_message(message.chat.id, 'Type number of news to select options')
+    bot.send_message(message.chat.id, 'Type number of news')
     bot.register_next_step_handler(message, show_details)
 
 
 def show_details(message: Message):
     if not (message.text in ['/quit', '/start']):
         if message.text.isdigit():
-            news_item = news['news'][int(message.text)]
+            news_item = get_news()['news'][int(message.text)]
             keyboard = InlineKeyboardMarkup()
             keyboard.add(
                 InlineKeyboardButton('Description', callback_data=message.text),
