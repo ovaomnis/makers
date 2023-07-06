@@ -1,7 +1,6 @@
 import datetime
 import json
-from typing import List, Dict
-import copy
+from typing import Dict
 
 import parser
 import telebot
@@ -90,10 +89,13 @@ def show_details(message: Message):
 def show_description(call: CallbackQuery):
     call_data = parse_call(call)
     news_item = get_news()['news'][call_data['news_id']]
-    bot.send_message(
-        call.message.chat.id, parser.get_description(parser.get_html(news_item['link'])),
-        reply_markup=InlineKeyboardMarkup().row(*ui_markup)
-    )
+    for line in parser.get_description(
+        parser.get_html(
+            news_item['link']
+        )
+    ):
+        bot.send_message(call.message.chat.id, line)
+    start_handler(call.message)
 
 
 @bot.message_handler(commands=['quit'])
