@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c74ec8d1-17ae-4cc1-9fa3-85152d0f6085" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../mini_hackaton_oop/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../mini_hackaton_oop/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../mini_hackaton_oop/validators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week6/parsing3/.idea/parsing3.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week6/parsing3/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/.idea/week7.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/cw-taks/pair2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/cw-taks/private_project.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/cw-taks/user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/encapsulation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/encapsulation2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/tasks/task10.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/tasks/task11.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/tasks/task12.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/tasks/task13.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/tasks/task14.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/encapsulation/tasks/task17.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/auto.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/clock.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/coder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/coder2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/cw1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/cw2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/languages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/mylist.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/cw-task/radio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/inheritance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/multiple_inheritance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/range.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task6.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task7.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/inheritance/tasks/task8.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/classes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/cw-task/hogwarts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/cw-task/snipers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/cw-task/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task6.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task7.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task8.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/task9.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week7/oop/tasks/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/abstract/cw-tasks/car.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/abstract/cw-tasks/daysanddates.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/abstract/cw-tasks/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/dunder_methods/dunder_methods.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/methods/cw-tasks/datautils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/methods/cw-tasks/fileutils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/methods/cw-tasks/mathutils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/methods/cw-tasks/mobile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/methods/cw-tasks/shape.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/methods/cw-tasks/stringutils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/methods/methods.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/solid/data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week8/solid/solid.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lesson1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../week5/htmlcss/class/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../week5/htmlcss/class/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2T5sNZSW0zIYY7YSKgW1GVWgXhM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c74ec8d1-17ae-4cc1-9fa3-85152d0f6085" name="Changes" comment="" />
+      <created>1690344236999</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690344236999</updated>
+      <workItem from="1690344238619" duration="2000" />
+    </task>
+    <servers />
+  </component>
+</project>
