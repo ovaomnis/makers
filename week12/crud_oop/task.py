@@ -38,6 +38,12 @@ class Task:
     def status(self):
         return self._status
 
+    def __str__(self):
+        return f'{self._title}: {self._status}'
+
+    def __repr__(self):
+        return self.__str__()
+
 
 if __name__ == '__main__':
     t1 = Task('do homework', 'do ur hw u stupid guy')
