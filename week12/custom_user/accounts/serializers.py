@@ -1,5 +1,6 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
+from .utils import send_activation_code
 
 
 User = get_user_model()
@@ -15,6 +16,7 @@ class RegistrationSerializer(serializers.Serializer):
     def validate_email(self, email):
         if User.objects.filter(email=email).exists():
             raise serializers.ValidationError('user with this email already exists')
+        return email
 
     def validate(self, attrs: dict):
         password = attrs.get('password')
@@ -28,6 +30,7 @@ class RegistrationSerializer(serializers.Serializer):
         print(validate_data)
         user = User.objects.create_user(**validate_data)
         user.create_activation_code()
+        send_activation_code(user.email, user.activation_code)
         return user
 
 
@@ -51,3 +54,31 @@ class ActivationSerializer(serializers.Serializer):
         user.is_active = True
         user.activation_code = ''
         user.save()
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
+
+    def validate_email(self, email):
+        if not User.objects.filter(email=email).exists():
+            raise serializers.ValidationError('User not found')
+        return email
+
+    def validate(self, attrs: dict) -> dict:
+        request = attrs.get('request')
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        if email and password:
+            user = authenticate(username=email, password=password, request=request)
+
+            if not user:
+                raise serializers.ValidationError(
+                    'Authentication Failed due to provided credentials'
+                )
+        else:
+            raise serializers.ValidationError('Email and Password are required')
+
+        attrs['user'] = user
+        return attrs

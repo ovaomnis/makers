@@ -15,11 +15,12 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email: str, password: str, **extra_fields) -> 'User':
-        extra_fields.setdefault('is_stuff', False)
+        extra_fields.setdefault('is_staff', False)
         return self._create(email, password, **extra_fields)
 
     def create_superuser(self, email: str, password: str, **extra_fields) -> 'User':
-        extra_fields.setdefault('is_stuff', True)
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_active', True)
         return self._create(email, password, **extra_fields)
 
 class User(AbstractBaseUser):
@@ -27,7 +28,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=40, blank=True)
     is_active = models.BooleanField(default=False)
-    is_stuff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=20, blank=True)
 
     objects = UserManager()
@@ -39,10 +40,10 @@ class User(AbstractBaseUser):
         return self.email
 
     def has_module_perms(self, app_label):
-        return self.is_stuff
+        return self.is_staff
 
-    def has_parm(self, perm, obj=None):
-        return self.is_stuff
+    def has_perm(self, perm, obj=None):
+        return self.is_staff
 
     def create_activation_code(self):
         code = get_random_string(15)

@@ -3,9 +3,9 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.authtoken.views import ObtainAuthToken
 
-
-from .serializers import RegistrationSerializer, ActivationSerializer
+from .serializers import RegistrationSerializer, ActivationSerializer, LoginSerializer
 
 # Create your views here.
 User = get_user_model()
@@ -26,3 +26,8 @@ class ActivationView(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.activate()
             return Response('Account Successfully activated', status=status.HTTP_200_OK)
+
+
+class LoginView(ObtainAuthToken):
+    serializer_class = LoginSerializer
+
