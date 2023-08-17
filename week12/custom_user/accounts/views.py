@@ -4,7 +4,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 
+from .permissions import IsActivePermission
 from .serializers import RegistrationSerializer, ActivationSerializer, LoginSerializer
 
 # Create your views here.
@@ -30,4 +32,15 @@ class ActivationView(APIView):
 
 class LoginView(ObtainAuthToken):
     serializer_class = LoginSerializer
+
+
+class LogoutView(APIView):
+    permission_classes = [IsActivePermission]
+
+    def post(self, request: Request):
+        user = request.user
+        Token.objects.filter(user=user).delete()
+        return Response(
+            'Successfully Logout'
+        )
 
