@@ -82,3 +82,36 @@ class LoginSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+    new_password_confirm = serializers.CharField(required=True)
+
+    def validate_old_password(self, old_password):
+        user = self.context.get('request').user
+        if not user.check_password(old_password):
+            raise serializers.ValidationError('old password is not correct')
+        return old_password
+
+    def validate(self, attrs):
+        new_password = attrs.get('new_password')
+        new_password_confirm = attrs.get('new_password_confirm')
+        user = self.context.get('request').user
+
+        if not new_password == new_password_confirm:
+            raise serializers.ValidationError('Password confirmation error')
+
+        if user.check_password(new_password):
+            raise serializers.ValidationError('New password are same with previous')
+
+        return attrs
+
+    def set_new_password(self):
+        new_password = self.validated_data.get('new_password')
+        user = self.context.get('request').user
+        user.set_password(new_password)
+        user.save()
+
+

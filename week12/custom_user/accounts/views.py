@@ -5,9 +5,10 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
 
 from .permissions import IsActivePermission
-from .serializers import RegistrationSerializer, ActivationSerializer, LoginSerializer
+from .serializers import RegistrationSerializer, ActivationSerializer, LoginSerializer, ChangePasswordSerializer
 
 # Create your views here.
 User = get_user_model()
@@ -44,3 +45,12 @@ class LogoutView(APIView):
             'Successfully Logout'
         )
 
+
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated, IsActivePermission]
+
+    def post(self, request: Request):
+        serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid(raise_exception=True):
+            serializer.set_new_password()
+            return Response('Password has successfully changed')
