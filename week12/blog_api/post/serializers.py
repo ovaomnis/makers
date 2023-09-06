@@ -22,7 +22,7 @@ class BasePostSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep.update({
-            'author': instance.author.username
+            'author': instance.author.email
         })
 
         return rep

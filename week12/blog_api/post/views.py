@@ -1,14 +1,16 @@
+import django_filters.rest_framework
 from django.shortcuts import render
 from rest_framework.request import Request
 from rest_framework.response import Response
 # from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 # from django.shortcuts import get_object_or_404
 from rest_framework import generics
-from rest_framework import mixins
+from rest_framework import mixins, viewsets, filters
 
 from .serializers import PostSerializer, PostDetailSerializer, CategorySerializer, TagSerializer
 from .models import Post, Category, Tag
+from .permissions import IsAuthorPermission
 
 
 # Create your views here.
@@ -49,23 +51,54 @@ from .models import Post, Category, Tag
 #         return Response(f'Post with slug {slug} successfully deleted')
 
 
-class PostListCreateView(generics.ListCreateAPIView):
+# class PostListCreateView(generics.ListCreateAPIView):
+#     queryset = Post.objects.all()
+#
+#     def get_serializer_class(self):
+#         if self.request.method in ['POST']:
+#             return PostDetailSerializer
+#         return PostSerializer
+#
+# class PostRetrieveView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Post.objects.all()
+#     serializer_class = PostDetailSerializer
+#
+# class CategoryListCreateView(generics.ListCreateAPIView):
+#     queryset = Category.objects.all()
+#     serializer_class = CategorySerializer
+#
+# class TagListCreateView(generics.ListCreateAPIView):
+#     queryset = Tag.objects.all()
+#     serializer_class = TagSerializer
+
+class PostModelViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend,
+                       filters.SearchFilter,
+                       filters.OrderingFilter]
+    filterset_fields = ['tag__title', 'category', 'author']
+    search_fields = ['title', 'body']
+    ordering_fields = ['created_at', 'title']
 
     def get_serializer_class(self):
-        if self.request.method in ['POST']:
-            return PostDetailSerializer
-        return PostSerializer
+        if self.action != 'list':
+            self.serializer_class = PostDetailSerializer
+        else:
+            self.serializer_class = PostSerializer
+        return super().get_serializer_class()
 
-class PostRetrieveView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostDetailSerializer
 
-class CategoryListCreateView(generics.ListCreateAPIView):
+    def get_permissions(self):
+        if self.action == 'create':
+            self.permission_classes = [IsAuthenticated]
+        elif self.action in ['update', 'partial_update', 'destroy']:
+            self.permission_classes = [IsAuthenticated, IsAuthorPermission]
+        else:
+            self.permission_classes = [AllowAny]
+        return super().get_permissions()
+
+
+class CategoryModelViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
-class TagListCreateView(generics.ListCreateAPIView):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-
