@@ -14,7 +14,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('email', 'password', 'password2')
     
     def validate_email(self, email):
-        print('emaiiiiil')
+        if User.objects.filter(email=email).exists():
+            raise serializers.ValidationError('Пользователь с таким email уже существует')
         return email
     
     def validate(self, attrs):
@@ -31,20 +32,20 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class LoginSerializer(serializers.Serializer):
-    email = serializers.EmailField(required=True)
-    password = serializers.CharField(required=True)
-
-    def validate_email(self, email):
-        if User.objects.filter(email=email).exists:
-            return email
-        raise serializers.ValidationError('Нет такого пользователя')
-
-    def validate(self, attrs):
-        user = authenticate(username=attrs.get('email'), password=attrs.get('password'))
-
-        if user:
-            attrs['user'] = user
-            return attrs
-
-        raise serializers.ValidationError('Неверный пароль!')
+# class LoginSerializer(serializers.Serializer):
+#     email = serializers.EmailField(required=True)
+#     password = serializers.CharField(required=True)
+#
+#     def validate_email(self, email):
+#         if User.objects.filter(email=email).exists:
+#             return email
+#         raise serializers.ValidationError('Нет такого пользователя')
+#
+#     def validate(self, attrs):
+#         user = authenticate(username=attrs.get('email'), password=attrs.get('password'))
+#
+#         if user:
+#             attrs['user'] = user
+#             return attrs
+#
+#         raise serializers.ValidationError('Неверный пароль!')
