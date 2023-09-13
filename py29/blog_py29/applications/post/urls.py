@@ -6,11 +6,13 @@ from rest_framework.routers import DefaultRouter
 #                     CreatePostView,
 #                     UpdatePostView,
 #                     DeletePostView)
-from .views import PostViewSet
+from .views import (PostViewSet,
+                    CommentViewSet)
 
 
 router = DefaultRouter()
-router.register('', PostViewSet, basename='post')
+router.register('post', PostViewSet, basename='post')
+router.register('comment', CommentViewSet)
 
 
 urlpatterns = [

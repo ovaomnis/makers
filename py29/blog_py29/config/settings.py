@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'django_filters',
     'drf_yasg',
     # apps
     'applications.account',
@@ -154,7 +155,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 1
+    'PAGE_SIZE': 10
 }
 
 SIMPLE_JWT = {
