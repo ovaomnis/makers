@@ -72,10 +72,10 @@ class LoginSerializer(serializers.Serializer):
 
         if email and password:
             user = authenticate(username=email, password=password, request=request)
-
+            print(user)
             if not user:
                 raise serializers.ValidationError(
-                    'Authentication Failed due to provided credentials'
+                    {'failed': 'Authentication Failed due to provided credentials'}
                 )
         else:
             raise serializers.ValidationError('Email and Password are required')

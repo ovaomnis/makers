@@ -15,8 +15,29 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='Cinema API',
+        default_version='v1',
+        description='The best ever site to watch cinema',
+        contact=openapi.Contact(email='cinema@support.com')
+    ),
+    public=True
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/account/', include('apps.account.urls')),
+    path('api/v1/', include('apps.film.urls')),
+    path('api/v1/', include('apps.feedback.urls')),
+    path('docs/', schema_view.with_ui('swagger')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

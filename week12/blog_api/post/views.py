@@ -10,7 +10,8 @@ from rest_framework import mixins, viewsets, filters
 
 from .serializers import PostSerializer, PostDetailSerializer, CategorySerializer, TagSerializer
 from .models import Post, Category, Tag
-from .permissions import IsAuthorPermission
+from .permissions import IsAuthorOrAdminPermission
+from accounts.permissions import IsAdminOrReadOnly
 
 
 # Create your views here.
@@ -79,7 +80,7 @@ class PostModelViewSet(viewsets.ModelViewSet):
                        filters.OrderingFilter]
     filterset_fields = ['tag__title', 'category', 'author']
     search_fields = ['title', 'body']
-    ordering_fields = ['created_at', 'title']
+    ordering_fields = ['-created_at', 'title']
 
     def get_serializer_class(self):
         if self.action != 'list':
@@ -93,7 +94,7 @@ class PostModelViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             self.permission_classes = [IsAuthenticated]
         elif self.action in ['update', 'partial_update', 'destroy']:
-            self.permission_classes = [IsAuthenticated, IsAuthorPermission]
+            self.permission_classes = [IsAuthenticated, IsAuthorOrAdminPermission]
         else:
             self.permission_classes = [AllowAny]
         return super().get_permissions()
@@ -102,3 +103,10 @@ class PostModelViewSet(viewsets.ModelViewSet):
 class CategoryModelViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAdminOrReadOnly, ]
+
+
+class TagModelViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [IsAdminOrReadOnly, ]

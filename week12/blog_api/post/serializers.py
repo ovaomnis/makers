@@ -1,9 +1,12 @@
 import uuid
+from django.db.models import Avg
 
 from rest_framework import serializers
 from slugify import slugify
 
 from .models import Post, Category, Tag
+from review.serializers import CommentSerializer
+
 
 
 class BasePostSerializer(serializers.ModelSerializer):
@@ -15,21 +18,30 @@ class BasePostSerializer(serializers.ModelSerializer):
     def create(self, validated_data: dict):
         user = self.context.get('request').user
         validated_data.update({
-            'author': user
+            'author': user,
         })
         return super().create(validated_data)
 
     def to_representation(self, instance):
+        avg_rating = instance.ratings.aggregate(avg_rating=Avg('rating'))['avg_rating']
+
         rep = super().to_representation(instance)
         rep.update({
-            'author': instance.author.email
+            'author': instance.author.email,
+            'rating': round(avg_rating,2) if avg_rating else None
         })
 
         return rep
 
 
 class PostDetailSerializer(BasePostSerializer):
-    ...
+    def to_representation(self, instance):
+        comments = CommentSerializer(instance.comments.all(), many=True)
+        rep = super().to_representation(instance)
+        rep.update({
+            'comments': comments.data
+        })
+        return rep
 
 
 class PostSerializer(BasePostSerializer):
