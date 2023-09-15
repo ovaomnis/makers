@@ -14,7 +14,7 @@ class Post(models.Model):
                               on_delete=models.CASCADE)
     title = models.CharField('Название', max_length=70)
     description = models.TextField('Описание', blank=True, null=True)
-    image = models.ImageField("Изображение", upload_to="images/")
+    # image = models.ImageField("Изображение", upload_to="images/")
     views = models.PositiveIntegerField("Просмотры", default=0)
     created_at = models.DateTimeField("Создано", auto_now_add=True)
     updated_at = models.DateTimeField("Последнее обновление", auto_now=True)
@@ -57,3 +57,14 @@ class Rating(models.Model):
 
     def __str__(self):
         return f'{self.owner} --> {self.post.title}'
+
+
+class PostImage(models.Model):
+    """
+    Картинки к постам
+    """
+    image = models.ImageField(upload_to='images/')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='images')
+
+    def __str__(self):
+        return f'image for: {self.post.title}'

@@ -7,12 +7,14 @@ from rest_framework.routers import DefaultRouter
 #                     UpdatePostView,
 #                     DeletePostView)
 from .views import (PostViewSet,
-                    CommentViewSet)
+                    CommentViewSet,
+                    ImageModelViewSet)
 
 
 router = DefaultRouter()
-router.register('post', PostViewSet, basename='post')
+router.register('image', ImageModelViewSet)
 router.register('comment', CommentViewSet)
+router.register('', PostViewSet, basename='post')
 
 
 urlpatterns = [

@@ -1,12 +1,12 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from applications.post.models import Post, Comment, Like, Rating
-from applications.post.serializers import PostSerializer, CommentSerializer, RatingSerializer
+from applications.post.models import Post, Comment, Like, PostImage
+from applications.post.serializers import PostSerializer, CommentSerializer, RatingSerializer, PostImageSerializer
 from .permissions import IsOwnerOrAdminOrReadOnly
 
 # Create your views here.
@@ -42,11 +42,6 @@ class PostViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsAuthenticatedOrReadOnly]
         return super().get_permissions()
 
-    def get_queryset(self):
-        q = super().get_queryset()
-        print(q)
-        return q
-
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
@@ -55,6 +50,14 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class ImageModelViewSet(mixins.CreateModelMixin,
+                        mixins.DestroyModelMixin,
+                        viewsets.GenericViewSet):
+    queryset = PostImage.objects.all()
+    serializer_class = PostImageSerializer
+    permission_classes = [IsAuthenticated]
 
 
 # class ListPostView(generics.ListAPIView):
