@@ -39,14 +39,14 @@ class CustomUser(AbstractUser):
     activation_code = models.CharField(max_length=40, blank=True)
     username = None
     is_active = models.BooleanField(default=False)
-
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
-
+    
     def __str__(self):
         return f'{self.email}'
-
+    
     def create_activation_code(self):
         import uuid
         code = str(uuid.uuid4())
