@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from account.serializers import *
 
@@ -24,3 +24,12 @@ class ActivationAPIView(APIView):
         user.activation_code = ''
         user.save(update_fields=['is_active', 'activation_code'])
         return Response('Успешно', status=200)
+
+
+class ChangePasswordAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        sz = ChangePasswordSerializer(data=request.data, context={'request': request})
+        sz.is_valid(raise_exception=True)
+        sz.set_new_password()
+        return Response('')
